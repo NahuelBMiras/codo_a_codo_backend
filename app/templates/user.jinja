@@ -1,0 +1,21 @@
+{% extends "base.jinja" %}
+
+{% block title %}User Page{% endblock %}
+
+{% block content %}
+    <h1>User Page</h1>
+    <h1>Perfil del Usuario</h1>
+    <p>Nombre: {{ user.nombre }}</p>
+    <p>Apellido: {{ user.apellido }}</p>
+    <p>Email: {{ user.mail }}</p>
+    <a href="/edit_user"><button>Editar Perfil</button></a>
+    <a href="#" onclick="confirmDelete()"><button>Eliminar Perfil</button></a>
+    <script>
+        function confirmDelete() {
+            if (confirm("¿Estás seguro de que deseas eliminar tu perfil? Esta acción no se puede deshacer.")) {
+                window.location.href = "/edit_user";
+            }
+        }
+    </script>
+{% endblock %}
+

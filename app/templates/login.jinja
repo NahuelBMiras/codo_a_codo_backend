@@ -1,0 +1,33 @@
+<form id="loginForm">
+  <input type="email" name="mail" placeholder="Email" required>
+  <input type="password" name="password" placeholder="Contraseña" required>
+  <button type="submit">Login</button>
+</form>
+<script>
+  document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    const data = {
+      mail: this.mail.value,
+      password: this.password.value
+    };
+
+    fetch("/login/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        window.location.href = data.redirect_url; // Redirige al usuario a la página de perfil
+      } else {
+        console.log('Login failed: ' + data.message);
+        // Muestra el mensaje de error al usuario
+      }
+    })
+    .catch(error => console.error("Error:", error));
+  });
+</script>

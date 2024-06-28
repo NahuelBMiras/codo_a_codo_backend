@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuario</title>
+</head>
+<body>
+    <h1>Editar Usuario</h1>
+    <form id="editUserForm">
+        <input type="text" name="nombre" placeholder="Nombre" value="{{ user.nombre }}" required>
+        <input type="text" name="apellido" placeholder="Apellido" value="{{ user.apellido }}" required>
+        <input type="email" name="mail" placeholder="Email" value="{{ user.mail }}" required>
+        <input type="password" name="password" placeholder="Nueva Contraseña">
+        <button type="submit">Guardar Cambios</button>
+    </form>
+
+    <h2>Eliminar Perfil</h2>
+    <form id="deleteUserForm">
+        <input type="password" name="password" placeholder="Contraseña para confirmar" required>
+        <button type="submit">Eliminar Perfil</button>
+    </form>
+
+    <script>
+        document.getElementById("editUserForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const data = {
+                nombre: this.nombre.value,
+                apellido: this.apellido.value,
+                mail: this.mail.value,
+                password: this.password.value
+            };
+
+            fetch("/edit_user/", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Datos actualizados correctamente');
+                    window.location.href = "/user_profile"; // Redirige al perfil del usuario
+                } else {
+                    console.log('Error: ' + data.message);
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+
+        document.getElementById("deleteUserForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const data = {
+                password: this.password.value
+            };
+
+            fetch("/delete_account/", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Cuenta eliminada exitosamente');
+                    window.location.href = data.redirect_url; // Redirige al índice después de eliminar la cuenta
+                } else {
+                    console.log('Error: ' + data.message);
+                    // Muestra el mensaje de error al usuario
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+</body>
+</html>
