@@ -1,5 +1,5 @@
 from flask import Blueprint, request, render_template, jsonify, session, redirect, url_for
-from .models import Users
+from .models import Users, Products, Articulo, PathImg
 from .database import db, bcrypt
 from functools import wraps
 
@@ -16,7 +16,24 @@ def login_required(f):
 @main_bp.route("/", methods=["GET"])
 @main_bp.route("/index/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    # Consulta para obtener los productos con sus artículos y las imágenes asociadas
+    productos = Products.query.join(Articulo).join(PathImg).order_by(Products.tiempo_de_subida.desc()).limit(6).all()
+
+    return render_template('index.html', productos=productos)
+
+@main_bp.route("/productos/", methods=["GET"])
+def productos():
+    return render_template("productos.html")
+
+
+@main_bp.route("/sobre-nosotros/", methods=["GET"])
+def sobre_nosotros():
+    return render_template("sobre_nosotros.html")
+
+
+@main_bp.route("/contacto/", methods=["GET"])
+def contacto():
+    return render_template("contacto.html")
 
 
 @main_bp.route("/edit_user/", methods=["GET", "PUT"])
@@ -24,7 +41,7 @@ def index():
 def edit_user():
     user_id = session['user_id']
     user = Users.query.filter_by(id_usuario=user_id).first()
-    
+
     if request.method == "PUT":
         try:
             data = request.get_json()
@@ -35,10 +52,10 @@ def edit_user():
                 user.password_hash = bcrypt.generate_password_hash(data['password']).decode('utf-8')
             db.session.commit()
             return jsonify(success=True, message="Datos actualizados correctamente")
-        
+
         except Exception as e:
             return jsonify(success=False, message="Se produjo un error", error=str(e)), 500
-    
+
     return render_template("edit_user.jinja", user=user)
 
 
@@ -73,7 +90,6 @@ def register():
             return jsonify(success=False, message="Se produjo un error", error=str(e)), 500
 
     return render_template("register.jinja")
-
 @main_bp.route("/login/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -95,7 +111,7 @@ def login():
 
     return render_template("login.jinja")
 
-@main_bp.route("/logout/")
+@main_bp.route("/logout/", methods=["POST"])
 def logout():
     session.pop('user_id', None)
     session.pop('user_email', None)
@@ -122,13 +138,10 @@ def delete_account():
             return jsonify(success=True, message="Cuenta eliminada exitosamente", redirect_url=url_for('.index'))
         else:
             return jsonify(success=False, message="Contraseña incorrecta"), 401
-    
     except Exception as e:
         return jsonify(success=False, message="Se produjo un error", error=str(e)), 500
 
 
-
-    
 
 @main_bp.route("/products/", methods=["GET"])
 def products():

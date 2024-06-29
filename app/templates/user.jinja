@@ -1,21 +1,29 @@
-{% extends "base.jinja" %}
+{% extends "base.html" %}
 
 {% block title %}User Page{% endblock %}
 
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+
 {% block content %}
-    <h1>User Page</h1>
-    <h1>Perfil del Usuario</h1>
-    <p>Nombre: {{ user.nombre }}</p>
-    <p>Apellido: {{ user.apellido }}</p>
-    <p>Email: {{ user.mail }}</p>
-    <a href="/edit_user"><button>Editar Perfil</button></a>
-    <a href="#" onclick="confirmDelete()"><button>Eliminar Perfil</button></a>
-    <script>
-        function confirmDelete() {
-            if (confirm("¿Estás seguro de que deseas eliminar tu perfil? Esta acción no se puede deshacer.")) {
-                window.location.href = "/edit_user";
-            }
-        }
-    </script>
+<article class="user">
+    <h1 class="titulo">User Page</h1>
+    <h2 class="subtitulo">Perfil del Usuario</h2>
+    <div class="contenedor_datos">
+        <p class="datos">Nombre: {{ user.nombre }}</p>
+        <p class="datos">Apellido: {{ user.apellido }}</p>
+        <p class="datos">Email: {{ user.mail }}</p>
+    </div>
+    <a href="/edit_user" ><button class="button">Editar Perfil</button></a>
+    <form id="logoutForm" method="POST" action="{{ url_for('main.logout') }}">
+        <button type="submit" class="button">Cerrar Sesión</button>
+    </form>
+</article>
+{% endblock %}
+{% block script %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/user.js') }}"></script>
 {% endblock %}
 

@@ -1,0 +1,762 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    height: 100svh;
+  }
+  
+  /* !Header */
+  header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(17, 17, 17, 255);
+    color: azure;
+  }
+  
+  header.buscando {
+    position: relative;
+  }
+  
+  .header_nav {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid azure;
+  
+    .header_nav-titulo {
+      width: 30%;
+      margin: 0 auto;
+      padding: 0.5em;
+      .header_nav-titulo-text {
+        margin-left: 0.5em;
+        display: none;
+      }
+  
+      .header_nav-titulo-logo {
+        width: 3.5em;
+      }
+    }
+  
+    .header_nav-iconos {
+      width: 2.5em;
+      color: azure;
+      &:hover {
+        color: rgb(233, 194, 143);
+      }
+    }
+  
+    /* !Header barra de búsqueda */
+    .header_nav-busqueda.buscando {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 2000;
+    }
+    .header_nav-busqueda {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 1em;
+      color: azure;
+  
+      .header_nav-busqueda-barra {
+        display: none;
+        background-color: rgb(226, 224, 222);
+      }
+  
+      .header_nav-busqueda-barra.buscando {
+        padding: 0 30% 0 15%;
+        font-size: 1rem;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: none;
+  
+        &:focus {
+          outline: none;
+        }
+      }
+  
+      .buscando {
+        display: block;
+      }
+  
+      .header_nav-busqueda-boton-close.buscando {
+        border: 0;
+        cursor: pointer;
+        background: none;
+        display: none;
+        color: black;
+  
+        display: block;
+        font-size: 1.5em;
+        position: absolute;
+        right: 1em;
+        width: 10%;
+      }
+  
+      .header_nav-busqueda-boton-lupa {
+        width: 2.5em;
+        padding: 0.5em;
+        text-align: center;
+        border: 0;
+        background-color: rgba(17, 17, 17, 255);
+        color: azure;
+        cursor: pointer;
+  
+        &:hover {
+          color: rgb(233, 194, 143);
+        }
+      }
+  
+      .header_nav-busqueda-boton-lupa.buscando {
+        width: 1em;
+        z-index: 20000;
+        background-color: rgb(226, 224, 222);
+        display: block;
+        color: black;
+        position: relative;
+        top: 20%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+      }
+  
+      .header_nav-busqueda-boton-close {
+        display: none;
+      }
+    }
+    /* !Header carrito y hamburguesa */
+    .header_nav-acciones {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .header_nav_ul-acciones-iconos {
+        display: flex;
+        list-style: none;
+      }
+    }
+    .menu-contenedor {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+  
+      .header_menu-desplegable {
+        width: 2.5em;
+        padding: 0.5em;
+        text-align: center;
+        margin-right: 1em;
+        margin-top: 0.4em;
+        border: 0;
+        background-color: rgba(17, 17, 17, 255);
+        color: azure;
+  
+        .menu {
+          &:hover {
+            color: rgb(233, 194, 143);
+          }
+        }
+        .menu.desplegado {
+          display: none;
+        }
+      }
+    }
+  }
+  
+  .cerrar-menu {
+    display: none;
+  }
+  .cerrar-menu.desplegado {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 40%;
+    transform: translate(-50%, -50%);
+  
+    border: none;
+    background-color: rgba(17, 17, 17, 255);
+    font-size: 1.2em;
+    color: aliceblue;
+  
+    &:hover {
+      color: rgb(233, 194, 143);
+    }
+  }
+  
+  /* !Links a otras paginas del sitio web */
+  .header_nav-links-de-navegacion {
+    width: 100%;
+  
+    .header_nav_ul-links-de-navegacion {
+      display: none;
+    }
+    .header_nav_ul-links-de-navegacion.desplegado {
+      display: flex;
+      list-style: none;
+      justify-content: space-around;
+      padding: 0.5em;
+      li a {
+        color: azure;
+        text-decoration: none;
+        &:hover {
+          color: rgb(233, 194, 143);
+        }
+      }
+    }
+  }
+  
+  /* !Main */
+  /* !carrusel */
+  
+  main {
+    margin-top: 4.5em;
+  }
+  
+  .main_article-carrusel {
+    position: relative;
+    width: 95%;
+    max-width: 120em;
+    max-height: 53em;
+    margin: 0.5em auto 1em auto;
+    overflow: hidden;
+  
+    .main_section-carrusel-container {
+      display: inline-block;
+      min-width: 300%;
+      .main_div-carrusel-items {
+        width: 100%;
+        flex-flow: row nowrap;
+      }
+  
+      .main_carrusel-item {
+        box-sizing: border-box;
+        .main_carrusel-img {
+          width: calc(100% / 3 - 0.2em);
+          box-sizing: border-box;
+        }
+      }
+    }
+  
+    .main_carrusel-button {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+  
+      .main_carrusel-button-prev {
+        height: 100%;
+        position: absolute;
+        background: transparent;
+        border: none;
+        color: rgba(0, 0, 0, 0.603);
+        cursor: pointer;
+        left: 0.1em;
+        font-size: 1.3rem;
+      }
+  
+      .main_carrusel-button-next {
+        height: 100%;
+        position: absolute;
+        background: transparent;
+        border: none;
+        color: rgba(0, 0, 0, 0.603);
+        cursor: pointer;
+        right: 0.1em;
+        font-size: 1.3rem;
+      }
+    }
+  }
+  
+  /* !Separadores de artículos */
+  .main_separador {
+    background-color: rgba(14, 14, 14, 0.534);
+    color: aliceblue;
+    text-align: center;
+    font-size: 1em;
+    margin: 1em 0;
+    min-width: 100%;
+  }
+  
+  /* !Categorías de los productos */
+  
+  .main_article-secciones {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+    .main_section-electrodomesticos,
+    .main_section-muebles,
+    .main_section-ropa,
+    .main_section-herramientas {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1em;
+  
+      width: 22em;
+      aspect-ratio: 2/1;
+  
+      position: relative;
+  
+      & .main_section_div-difuminado {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.253);
+  
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+      }
+  
+      .main_section_secciones-text {
+        position: absolute;
+      }
+    }
+  
+    .main_article-secciones-link {
+      width: calc(100% / 4);
+      text-decoration: none;
+      color: rgb(255, 255, 255);
+  
+      .main_section-electrodomesticos {
+        background-image: url(../Img/electro.jpg);
+        background-size: cover; /* Esto hace que la imagen de fondo cubra todo el contenedor */
+        background-position: center;
+        order: 1;
+      }
+  
+      .main_section-muebles {
+        background-image: url(../Img/mueble.jpg);
+        background-size: cover; /* Esto hace que la imagen de fondo cubra todo el contenedor */
+        background-position: center;
+        order: 2;
+      }
+  
+      .main_section-ropa {
+        background-image: url(../Img/ropa.jpg);
+        background-size: cover; /* Esto hace que la imagen de fondo cubra todo el contenedor */
+        background-position: center;
+        order: 3;
+      }
+  
+      .main_section-herramientas {
+        background-image: url(../Img/herramientas-manuales-basicas-02-2022-07.jpg);
+        background-size: cover; /* Esto hace que la imagen de fondo cubra todo el contenedor */
+        background-position: center;
+        order: 4;
+      }
+    }
+  }
+  
+  /* !Algunos productos */
+  .main_article_muestras {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 75%;
+    margin: 0 auto;
+  
+    .main_muestras_link {
+      display: block;
+      position: relative;
+  
+      .main_muestras_img {
+        width: 19em;
+        aspect-ratio: 3/2;
+        border-radius: 2.5em;
+        padding: 1em;
+        margin-bottom: 1em;
+      }
+  
+      & .main_muestra_div-difuminado {
+        border: 1.5px solid black;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        aspect-ratio: 3/2;
+        border-radius: 1em;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  
+        .main_muetras-text {
+          display: none;
+          color: rgb(255, 255, 255);
+          position: absolute;
+          font-size: 2rem;
+        }
+  
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.158);
+          border: 4px solid rgb(223, 174, 113);
+        }
+  
+        &:hover .main_muetras-text {
+          display: block;
+        }
+      }
+    }
+  }
+  
+  /* !Footer */
+  footer {
+    background-color: rgba(17, 17, 17, 255);
+    color: azure;
+  }
+  
+  .footer_nav_ul-links-de-navegacion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+  
+    .footer_navegacion-direccion {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0.5em;
+    }
+  
+    .footer_navegacion-redes {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.2rem;
+  
+      & li {
+        list-style: none;
+        margin: 0 0.8em;
+        margin-bottom: 0.5em;
+      }
+  
+      & a {
+        color: azure;
+        text-decoration: none;
+        padding: 0.3em;
+        border: 2px solid transparent;
+  
+        &:hover {
+          border: 2px solid rgb(233, 194, 143);
+          border-radius: 40%;
+          color: rgb(233, 194, 143);
+        }
+      }
+    }
+  
+    & h4 {
+      margin-bottom: 0.5em;
+    }
+  }
+  
+  @media (width > 750px) {
+    .header_nav {
+      .header_nav-titulo {
+        .header_nav-titulo-logo {
+          width: 5em;
+        }
+      }
+  
+      .header_nav-iconos {
+        font-size: 1rem;
+      }
+  
+      .header_nav-busqueda-boton-lupa {
+        font-size: 1rem;
+      }
+  
+      .header_nav-acciones {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .header_nav_ul-acciones-iconos {
+          display: flex;
+          list-style: none;
+        }
+      }
+      .header_menu-desplegable {
+        font-size: 1rem;
+        margin-bottom: 0.4em;
+      }
+    }
+  
+    .main_separador {
+      font-size: 1.5em;
+    }
+  
+    main {
+      margin-top: 5.5em;
+    }
+  
+    .main_article-secciones {
+      flex-direction: row;
+  
+      .main_section-electrodomesticos,
+      .main_section-muebles,
+      .main_section-ropa,
+      .main_section-herramientas {
+        width: 22em;
+        aspect-ratio: 2/1;
+        margin: 1em 0.7em;
+      }
+    }
+  
+    .main_article_muestras {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+  
+      .main_muestras_link {
+        width: 70%;
+        margin: 0 0.5em;
+  
+        .main_muestras_img {
+          width: 22em;
+          aspect-ratio: 3/2;
+        }
+  
+        & .main_muestra_div-difuminado {
+          width: 22em;
+        }
+      }
+    }
+  }
+  
+  @media (width > 800px) {
+    .main_article-carrusel {
+      .main_carrusel-button {
+        .main_carrusel-button-prev {
+          font-size: 1.7rem;
+        }
+        .main_carrusel-button-next {
+          font-size: 1.7rem;
+        }
+      }
+    }
+  
+    .main_article-secciones {
+      .main_section-electrodomesticos,
+      .main_section-muebles,
+      .main_section-ropa,
+      .main_section-herramientas {
+        width: 24em;
+      }
+    }
+  }
+  
+  @media (width > 950px) {
+    .main_article-secciones {
+      .main_section-electrodomesticos,
+      .main_section-muebles,
+      .main_section-ropa,
+      .main_section-herramientas {
+        width: 28em;
+      }
+    }
+  
+    .main_article_muestras {
+      .main_muestras_link {
+        width: 70%;
+        margin: 0 0.5em;
+  
+        .main_muestras_img {
+          width: 27em;
+        }
+        & .main_muestra_div-difuminado {
+          width: 27em;
+        }
+      }
+    }
+  }
+  
+  @media (width > 980px) {
+    .main_article-secciones {
+      .main_section-electrodomesticos,
+      .main_section-muebles,
+      .main_section-ropa,
+      .main_section-herramientas {
+        width: 29em;
+        .main_section_secciones-text {
+          font-size: 2.5rem;
+        }
+      }
+    }
+    .main_article_muestras {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+  
+      .main_muestras_link {
+        width: 70%;
+        margin: 0 0.5em;
+  
+        .main_muestras_img {
+          width: 29em;
+        }
+        & .main_muestra_div-difuminado {
+          width: 29em;
+        }
+      }
+    }
+  }
+  
+  @media (width > 1170px) {
+    .header_nav {
+      .header_nav-titulo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .header_nav-titulo-text {
+          font-size: 2.5rem;
+          display: block;
+        }
+  
+        .header_nav-titulo-logo {
+          width: 4em;
+        }
+      }
+  
+      .header_nav-iconos {
+        font-size: 1rem;
+      }
+  
+      .header_nav-busqueda-boton-lupa {
+        font-size: 1rem;
+      }
+  
+      .header_nav-acciones {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .header_nav_ul-acciones-iconos {
+          display: flex;
+          list-style: none;
+        }
+      }
+      .header_menu-desplegable {
+        font-size: 1rem;
+        margin-bottom: 0.4em;
+        margin-right: 5em;
+      }
+    }
+  
+    .main_article-carrusel {
+      width: 85%;
+    }
+  }
+  
+  @media (width > 1280px) {
+    .header_nav {
+      .header_nav-acciones {
+        .header_nav_ul-acciones-iconos {
+          margin-right: 5em;
+        }
+      }
+      .header_menu-desplegable {
+        display: none;
+      }
+      .cerrar-menu {
+        display: none;
+      }
+    }
+  
+    .header_nav-links-de-navegacion {
+      display: block;
+      width: 100%;
+  
+      .header_nav_ul-links-de-navegacion {
+        display: flex;
+        list-style: none;
+        justify-content: space-around;
+        font-size: 1.1rem;
+        padding: 0.3em;
+        li a {
+          color: azure;
+          text-decoration: none;
+          &:hover {
+            color: rgb(233, 194, 143);
+          }
+        }
+      }
+    }
+  
+    main {
+      margin-top: 7.5em;
+    }
+    .main_article-secciones {
+      .main_section-electrodomesticos,
+      .main_section-muebles,
+      .main_section-ropa,
+      .main_section-herramientas {
+        width: 40em;
+      }
+    }
+  
+    .main_article_muestras {
+      grid-template-columns: 1fr 1fr 1fr;
+      row-gap: 1em;
+      margin-bottom: 1.5em;
+  
+      .main_muestras_link {
+        .main_muestras_img {
+          width: 26em;
+        }
+        & .main_muestra_div-difuminado {
+          width: 26em;
+        }
+      }
+    }
+  }
+  
+  @media (width > 1400px) {
+    .main_article-carrusel {
+      width: 75%;
+    }
+  }
+  
+  @media (width > 1600px) {
+    .header_nav {
+      .header_nav-acciones {
+        .header_nav_ul-acciones-iconos {
+          margin-right: 10em;
+        }
+      }
+      .header_menu-desplegable {
+        display: none;
+      }
+    }
+  
+    .main_article-carrusel {
+      width: 65%;
+    }
+  }
+  
+  @media (width > 1730px) {
+    .main_article_muestras {
+      margin-left: 12.5%;
+    }
+  }
+  
+  @media (width > 1800px) {
+    .main_article-carrusel {
+      width: 60%;
+    }
+  
+    .main_article_muestras {
+      margin-left: 13.5%;
+    }
+  }

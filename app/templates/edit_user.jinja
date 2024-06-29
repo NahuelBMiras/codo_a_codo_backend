@@ -1,82 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Usuario</title>
-</head>
-<body>
-    <h1>Editar Usuario</h1>
-    <form id="editUserForm">
-        <input type="text" name="nombre" placeholder="Nombre" value="{{ user.nombre }}" required>
-        <input type="text" name="apellido" placeholder="Apellido" value="{{ user.apellido }}" required>
-        <input type="email" name="mail" placeholder="Email" value="{{ user.mail }}" required>
-        <input type="password" name="password" placeholder="Nueva Contraseña">
-        <button type="submit">Guardar Cambios</button>
-    </form>
+{% extends "base.html" %}
 
-    <h2>Eliminar Perfil</h2>
-    <form id="deleteUserForm">
-        <input type="password" name="password" placeholder="Contraseña para confirmar" required>
-        <button type="submit">Eliminar Perfil</button>
-    </form>
+{% block title %}User Page{% endblock %}
 
-    <script>
-        document.getElementById("editUserForm").addEventListener("submit", function(event) {
-            event.preventDefault();
 
-            const data = {
-                nombre: this.nombre.value,
-                apellido: this.apellido.value,
-                mail: this.mail.value,
-                password: this.password.value
-            };
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/edit_user.css') }}">
+{% endblock %}
 
-            fetch("/edit_user/", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Datos actualizados correctamente');
-                    window.location.href = "/user_profile"; // Redirige al perfil del usuario
-                } else {
-                    console.log('Error: ' + data.message);
-                }
-            })
-            .catch(error => console.error("Error:", error));
-        });
+{% block content %}
+<article>
+    <section>
+        <h2>Editar Usuario</h2>
+        <form id="editUserForm" class="form">
+            <input type="text" name="nombre" placeholder="Nombre" value="{{ user.nombre }}" required class="input">
+            <input type="text" name="apellido" placeholder="Apellido" value="{{ user.apellido }}" required class="input">
+            <input type="email" name="mail" placeholder="Email" value="{{ user.mail }}" required class="input">
+            <input type="password" name="password" placeholder="Nueva Contraseña" class="input">
+            <button type="submit" class="button">Guardar Cambios</button>
+        </form>
+    </section>
+    <section>
+        <h2>Eliminar Perfil</h2>
+        <form id="deleteUserForm" class="form">
+            <input type="password" name="password" placeholder="Contraseña para confirmar" required class="input">
+            <button type="submit" class="button">Eliminar Perfil</button>
+        </form>
+    </section>
+</article>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/edit_user.js') }}"></script>
+{% endblock %}
 
-        document.getElementById("deleteUserForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-
-            const data = {
-                password: this.password.value
-            };
-
-            fetch("/delete_account/", {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Cuenta eliminada exitosamente');
-                    window.location.href = data.redirect_url; // Redirige al índice después de eliminar la cuenta
-                } else {
-                    console.log('Error: ' + data.message);
-                    // Muestra el mensaje de error al usuario
-                }
-            })
-            .catch(error => console.error("Error:", error));
-        });
-    </script>
-</body>
-</html>

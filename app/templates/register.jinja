@@ -1,38 +1,27 @@
-<form id="registerForm">
-  <input type="text" name="nombre" placeholder="Nombre" required>
-  <input type="text" name="apellido" placeholder="Apellido" required>
-  <input type="email" name="mail" placeholder="Email" required>
-  <input type="password" name="password" placeholder="Contraseña" required>
-  <button type="submit">Register</button>
-</form>
+{% extends "base.html" %}
+
+{% block title %}Registro{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+{% endblock %}
+
+{% block content %}
+  <form id="registerForm" class="form_register">
+    <input type="text" name="nombre" placeholder="Nombre" class="input_nombre input" required>
+    <input type="text" name="apellido" placeholder="Apellido" class="input_apellido input" required>
+    <input type="email" name="mail" placeholder="Email" class="input_email input" required>
+    <input type="password" name="password" placeholder="Contraseña" class="input_password input" required>
+    <button type="submit" class="button">Registrar</button>
+  </form>
+{% endblock %}
 
 <script>
-  document.getElementById("registerForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    
-    const data = {
-      nombre: this.nombre.value,
-      apellido: this.apellido.value,
-      mail: this.mail.value,
-      password: this.password.value
-    };
-
-    fetch("/register/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        window.location.href = "/login"; // Redirige al usuario a la página principal
-      } else {
-        console.log('Registration failed: ' + data.message);
-        // Muestra el mensaje de error al usuario
-      }
-    })
-    .catch(error => console.error("Error:", error));
-  });
+console.log("hola")
 </script>
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+{% endblock %}

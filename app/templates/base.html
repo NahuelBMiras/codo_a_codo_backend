@@ -1,626 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}Te Vendo Todo{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='Css/index.css') }}" />
-    <script src="https://kit.fontawesome.com/4db8309fde.js" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='Js/index.js') }}"></script>
-    <style>
-        /* Todo el CSS proporcionado va aquí */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            height: 100svh;
-        }
-
-        /* !Header */
-        header {
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: 0;
-            z-index: 1000;
-            background-color: rgba(17, 17, 17, 255);
-            color: azure;
-        }
-
-        header.buscando {
-            position: relative;
-        }
-
-        .header_nav {
-            width: 100%;
-            display: flex;
-            flex-wrap: nowrap;
-            border-bottom: 1px solid azure;
-
-            .header_nav-titulo {
-                width: 30%;
-                margin: 0 auto;
-                padding: 0.5em;
-
-                .header_nav-titulo-text {
-                    margin-left: 0.5em;
-                    display: none;
-                }
-
-                .header_nav-titulo-logo {
-                    width: 3.5em;
-                }
-            }
-
-            .header_nav-iconos {
-                width: 2.5em;
-                color: azure;
-
-                &:hover {
-                    color: rgb(233, 194, 143);
-                }
-            }
-
-            /* !Header barra de búsqueda */
-            .header_nav-busqueda.buscando {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                z-index: 2000;
-            }
-
-            .header_nav-busqueda {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-right: 1em;
-                color: azure;
-
-                .header_nav-busqueda-barra {
-                    display: none;
-                    background-color: rgb(226, 224, 222);
-                }
-
-                .header_nav-busqueda-barra.buscando {
-                    padding: 0 30% 0 15%;
-                    font-size: 1rem;
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-
-                    &:focus {
-                        outline: none;
-                    }
-                }
-
-                .buscando {
-                    display: block;
-                }
-
-                .header_nav-busqueda-boton-close.buscando {
-                    border: 0;
-                    cursor: pointer;
-                    background: none;
-                    display: none;
-                    color: black;
-
-                    display: block;
-                    font-size: 1.5em;
-                    position: absolute;
-                    right: 1em;
-                    width: 10%;
-                }
-
-                .header_nav-busqueda-boton-lupa {
-                    width: 2.5em;
-                    padding: 0.5em;
-                    text-align: center;
-                    border: 0;
-                    background-color: rgba(17, 17, 17, 255);
-                    color: azure;
-                    cursor: pointer;
-
-                    &:hover {
-                        color: rgb(233, 194, 143);
-                    }
-                }
-
-                .header_nav-busqueda-boton-lupa.buscando {
-                    width: 1em;
-                    z-index: 20000;
-                    background-color: rgb(226, 224, 222);
-                    display: block;
-                    color: black;
-                    position: relative;
-                    top: 20%;
-                    left: 25%;
-                    transform: translate(-50%, -50%);
-                }
-
-                .header_nav-busqueda-boton-close {
-                    display: none;
-                }
-            }
-
-            /* !Header carrito y hamburguesa */
-            .header_nav-acciones {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                .header_nav_ul-acciones-iconos {
-                    display: flex;
-                    list-style: none;
-                }
-            }
-
-            .menu-contenedor {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                position: relative;
-
-                .header_menu-desplegable {
-                    width: 2.5em;
-                    padding: 0.5em;
-                    text-align: center;
-                    margin-right: 1em;
-                    margin-top: 0.4em;
-                    border: 0;
-                    background-color: rgba(17, 17, 17, 255);
-                    color: azure;
-
-                    .menu {
-                        &:hover {
-                            color: rgb(233, 194, 143);
-                        }
-                    }
-
-                    .menu.desplegado {
-                        display: none;
-                    }
-                }
-            }
-        }
-
-        .cerrar-menu {
-            display: none;
-        }
-
-        .cerrar-menu.desplegado {
-            display: block;
-            position: absolute;
-            top: 50%;
-            right: 40%;
-            transform: translate(-50%, -50%);
-
-            border: none;
-            background-color: rgba(17, 17, 17, 255);
-            font-size: 1.2em;
-            color: aliceblue;
-
-            &:hover {
-                color: rgb(233, 194, 143);
-            }
-        }
-
-        /* !Links a otras paginas del sitio web */
-        .header_nav-links-de-navegacion {
-            width: 100%;
-
-            .header_nav_ul-links-de-navegacion {
-                display: none;
-            }
-
-            .header_nav_ul-links-de-navegacion.desplegado {
-                display: flex;
-                list-style: none;
-                justify-content: space-around;
-                padding: 0.5em;
-
-                li a {
-                    color: azure;
-                    text-decoration: none;
-
-                    &:hover {
-                        color: rgb(233, 194, 143);
-                    }
-                }
-            }
-        }
-
-        footer {
-            background-color: rgba(17, 17, 17, 255);
-            color: azure;
-        }
-
-        .footer_nav_ul-links-de-navegacion {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            list-style: none;
-
-            .footer_navegacion-direccion {
-                list-style: none;
-                display: flex;
-                flex-direction: column;
-                margin-bottom: 0.5em;
-            }
-
-            .footer_navegacion-redes {
-                display: flex;
-                width: 100%;
-                justify-content: space-between;
-                align-items: center;
-                font-size: 1.2rem;
-
-                & li {
-                    list-style: none;
-                    margin: 0 0.8em;
-                    margin-bottom: 0.5em;
-                }
-
-                & a {
-                    color: azure;
-                    text-decoration: none;
-                    padding: 0.3em;
-                    border: 2px solid transparent;
-
-                    &:hover {
-                        border: 2px solid rgb(233, 194, 143);
-                        border-radius: 40%;
-                        color: rgb(233, 194, 143);
-                    }
-                }
-            }
-
-            & h4 {
-                margin-bottom: 0.5em;
-            }
-        }
-
-        @media (width > 750px) {
-            .header_nav {
-                .header_nav-titulo {
-                    .header_nav-titulo-logo {
-                        width: 5em;
-                    }
-                }
-
-                .header_nav-iconos {
-                    font-size: 1rem;
-                }
-
-                .header_nav-busqueda-boton-lupa {
-                    font-size: 1rem;
-                }
-
-                .header_nav-acciones {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    .header_nav_ul-acciones-iconos {
-                        display: flex;
-                        list-style: none;
-                    }
-                }
-
-                .header_menu-desplegable {
-                    font-size: 1rem;
-                    margin-bottom: 0.4em;
-                }
-            }
-
-            .main_separador {
-                font-size: 1.5em;
-            }
-
-            main {
-                margin-top: 5.5em;
-            }
-
-            .main_article-secciones {
-                flex-direction: row;
-
-                .main_section-electrodomesticos,
-                .main_section-muebles,
-                .main_section-ropa,
-                .main_section-herramientas {
-                    width: 22em;
-                    aspect-ratio: 2/1;
-                    margin: 1em 0.7em;
-                }
-            }
-
-            .main_article_muestras {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-
-                .main_muestras_link {
-                    width: 70%;
-                    margin: 0 0.5em;
-
-                    .main_muestras_img {
-                        width: 22em;
-                        aspect-ratio: 3/2;
-                    }
-
-                    & .main_muestra_div-difuminado {
-                        width: 22em;
-                    }
-                }
-            }
-        }
-
-        @media (width > 800px) {
-            .main_article-carrusel {
-                .main_carrusel-button {
-                    font-size: 4rem;
-                    width: 7%;
-                }
-
-                .main_carrusel-items {
-                    width: 95%;
-                    height: 70%;
-                }
-            }
-
-            .main_article_muestras {
-                .main_muestras_link {
-                    width: 70%;
-
-                    .main_muestras_img {
-                        width: 22em;
-                        aspect-ratio: 3/2;
-                    }
-
-                    & .main_muestra_div-difuminado {
-                        width: 22em;
-                    }
-                }
-            }
-        }
-
-        @media (width > 1100px) {
-            .header_nav {
-                .header_nav-titulo {
-                    .header_nav-titulo-logo {
-                        width: 5em;
-                    }
-
-                    .header_nav-titulo-text {
-                        font-size: 1.5rem;
-                        display: inline;
-                    }
-                }
-
-                .header_nav-iconos {
-                    font-size: 1.5rem;
-                }
-
-                .header_nav-busqueda-boton-lupa {
-                    font-size: 1.5rem;
-                }
-
-                .header_nav-acciones {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    .header_nav_ul-acciones-iconos {
-                        display: flex;
-                        list-style: none;
-                    }
-                }
-
-                .header_menu-desplegable {
-                    font-size: 1.5rem;
-                    margin-bottom: 0.4em;
-                }
-            }
-
-            .main_separador {
-                font-size: 1.5em;
-            }
-
-            main {
-                margin-top: 5.5em;
-            }
-
-            .main_article-secciones {
-                flex-direction: row;
-
-                .main_section-electrodomesticos,
-                .main_section-muebles,
-                .main_section-ropa,
-                .main_section-herramientas {
-                    width: 30em;
-                    aspect-ratio: 2/1;
-                    margin: 1em 1em;
-                }
-            }
-
-            .main_article_muestras {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-
-                .main_muestras_link {
-                    width: 70%;
-                    margin: 0 0.5em;
-
-                    .main_muestras_img {
-                        width: 30em;
-                        aspect-ratio: 3/2;
-                    }
-
-                    & .main_muestra_div-difuminado {
-                        width: 30em;
-                    }
-                }
-            }
-        }
-
-        @media (width > 1350px) {
-            .main_article_muestras {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-
-                .main_muestras_link {
-                    width: 100%;
-                    margin: 0 0.5em;
-
-                    .main_muestras_img {
-                        width: 30em;
-                        aspect-ratio: 3/2;
-                    }
-
-                    & .main_muestra_div-difuminado {
-                        width: 30em;
-                    }
-                }
-            }
-        }
-    </style>
-</head>
-
-<body>
+    <title>Te Vendo Todo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
+    {% block styles %}
+    {% endblock %}
+    <script
+    src="https://kit.fontawesome.com/4db8309fde.js"
+    crossorigin="anonymous"
+  ></script>
+  </head>
+
+  <body>
     <header>
-        <!-- Header HTML aquí -->
-        <nav class="header_nav">
-            <!-- Titulo y logo del sitio web -->
-            <div class="header_nav-titulo">
-                <img class="header_nav-titulo-logo" src="https://via.placeholder.com/150x50" alt="logo del sitio web" />
-                <p class="header_nav-titulo-text">Te Vendo Todo</p>
-            </div>
-
-            <!-- Barra de búsqueda -->
-            <div class="header_nav-busqueda">
-                <input type="text" class="header_nav-busqueda-barra" placeholder="¿Qué estás buscando?" />
-                <i class="fa-solid fa-magnifying-glass header_nav-busqueda-boton-lupa"></i>
-                <button type="button" class="header_nav-busqueda-boton-close"></button>
-            </div>
-
-            <!-- Links a otras paginas del sitio web -->
-            <div class="header_nav-links-de-navegacion">
-                <ul class="header_nav_ul-links-de-navegacion">
-                    <li><a href="/">Inicio</a></li>
-                    <li><a href="/products">Productos</a></li>
-                    <li><a href="/contact">Contacto</a></li>
-                    <li><a href="/about">Acerca de</a></li>
-                </ul>
-            </div>
-
-            <!-- Iconos de carrito y perfil de usuario -->
-            <div class="header_nav-acciones">
-                <ul class="header_nav_ul-acciones-iconos">
-                    <li>
-                        <i class="fa-solid fa-cart-shopping header_nav-iconos"></i>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-user header_nav-iconos"></i>
-                    </li>
-                    <!-- Hamburguesa para desplegar menú -->
-                    <li class="menu-contenedor">
-                        <button type="button" class="header_menu-desplegable">
-                            <i class="fa-solid fa-bars menu"></i>
-                        </button>
-                        <button type="button" class="cerrar-menu">
-                            <i class="fa-solid fa-x"></i>
-                        </button>
-                    </li>
-                </ul>
-            </div>
+      <nav class="header_nav">
+        <section class="header_nav-titulo">
+          <img src="../static/img/logo.jpeg" alt="" class="header_nav-titulo-logo" />
+          <h1 class="header_nav-titulo-text">Te Vendo Todo</h1>
+        </section>
+        <nav class="header_nav-busqueda">
+          <input
+            type="text"
+            placeholder="Buscar..."
+            class="header_nav-busqueda-barra"
+          />
+          <button
+            class="header_nav-busqueda-boton-lupa header_nav-button-iconos"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <button
+            class="header_nav-busqueda-boton-close header_nav-button-iconos"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </nav>
+        <nav class="header_nav-acciones">
+          <ul class="header_nav_ul-acciones-iconos">
+            {% if 'user_id' in session %}
+            <li>
+              <a href="{{ url_for('main.user_profile') }}">
+                <i class="fa-solid fa-user header_nav-iconos"></i>
+              </a>
+            </li>
+          {% else %}
+            <li>
+              <a href="{{ url_for('main.login') }}">
+                <i class="fa-solid fa-user header_nav-iconos"></i>
+              </a>
+            </li>
+          {% endif %}
+            <li>
+              <a href=""
+                ><i class="fa-solid fa-cart-shopping header_nav-iconos"></i
+              ></a>
+            </li>
+          </ul>
+        </nav>
+        <section class="menu-contenedor">
+          <button class="header_menu-desplegable header_nav-button-iconos">
+            <i class="fa-solid fa-bars menu"></i>
+          </button>
+          <button class="cerrar-menu">
+            <i class="fa-solid fa-xmark cerrar-menu"></i>
+          </button>
+        </section>
+      </nav>
+      <nav class="header_nav-links-de-navegacion">
+        <ul class="header_nav_ul-links-de-navegacion">
+          <li><a href="{{ url_for('main.index') }}">Inicio</a></li>
+          <li><a href="{{ url_for('main.productos') }}">Productos</a></li>
+          <li><a href="{{ url_for('main.sobre_nosotros') }}">Sobre Nosotros</a></li>
+          <li><a href="{{ url_for('main.contacto') }}">Contacto</a></li>
+        </ul>
+      </nav>
     </header>
-
-    <!-- Contenido principal -->
     <main>
         {% block content %}
         {% endblock %}
-    </main>
-
+      </main>
     <footer>
-        <!-- Footer HTML aquí -->
         <nav>
-            <ul class="footer_nav_ul-links-de-navegacion">
-                <h4>Redes sociales</h4>
-                <div class="footer_navegacion-redes">
-                    <li>
-                        <a href="https://www.facebook.com/">
-                            <i class="fa-brands fa-facebook"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://twitter.com/">
-                            <i class="fa-brands fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                    </li>
-                </div>
-                <div class="footer_navegacion-direccion">
-                    <h4>Contacto</h4>
-                    <li>Teléfono: 555 555 5555</li>
-                    <li>Email: tevendetodo@example.com</li>
-                </div>
-            </ul>
+          <ul class="footer_nav_ul-links-de-navegacion">
+            <li>
+              <ul class="footer_navegacion-direccion">
+                <li>
+                  <h3>Direccion</h3>
+                </li>
+                <li>
+                  <h3>..................</h3>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <ul class="footer_navegacion-redes">
+                <li>
+                  <a href=""><i class="fa-brands fa-instagram"></i></a>
+                </li>
+                <li>
+                  <a href=""><i class="fa-brands fa-facebook"></i></a>
+                </li>
+                <li>
+                  <a href=""><i class="fa-brands fa-whatsapp"></i></a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <h4>Derechos de autor para codoacodo</h4>
+            </li>
+          </ul>
         </nav>
-    </footer>
-
-    <script>
-        /* Todo el JavaScript proporcionado va aquí */
-        const btnLupa = document.querySelector(".header_nav-busqueda-boton-lupa");
-        const barraBusqueda = document.querySelector(".header_nav-busqueda-barra");
-        const btnClose = document.querySelector(".header_nav-busqueda-boton-close");
-        const btnMenu = document.querySelector(".header_menu-desplegable");
-        const linksNavegacion = document.querySelector(
-            ".header_nav_ul-links-de-navegacion"
-        );
-        const btnMenuCerrar = document.querySelector(".cerrar-menu");
-
-        const iconoMenu = document.querySelector(".menu");
-        const iconoClose = document.querySelector(".fa-x");
-
-        // Accion de la lupa para abrir la barra de búsqueda
-        btnLupa.addEventListener("click", function () {
-            btnLupa.classList.toggle("buscando");
-            barraBusqueda.classList.toggle("buscando");
-            btnClose.classList.toggle("buscando");
-        });
-
-        // Acción de la "X" para cerrar la barra de búsqueda
-        btnClose.addEventListener("click", function () {
-            btnLupa.classList.remove("buscando");
-            barraBusqueda.classList.remove("buscando");
-            btnClose.classList.remove("buscando");
-        });
-
-        // Acción del menu para desplegar los links
-        btnMenu.addEventListener("click", function () {
-            linksNavegacion.classList.toggle("desplegado");
-            iconoMenu.classList.toggle("desplegado");
-            btnMenuCerrar.classList.toggle("desplegado");
-            iconoClose.classList.toggle("desplegado");
-        });
-
-        // Acción del menu para cerrar los links
-        btnMenuCerrar.addEventListener("click", function () {
-            linksNavegacion.classList.remove("desplegado");
-            iconoMenu.classList.remove("desplegado");
-            btnMenuCerrar.classList.remove("desplegado");
-            iconoClose.classList.remove("desplegado");
-        });
-    </script>
-</body>
-
-</html>
+      </footer>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    {% block scripts %}
+    {% endblock %}
+    </body>
+  </html>

@@ -1,33 +1,23 @@
-<form id="loginForm">
-  <input type="email" name="mail" placeholder="Email" required>
-  <input type="password" name="password" placeholder="Contraseña" required>
-  <button type="submit">Login</button>
-</form>
-<script>
-  document.getElementById("loginForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    
-    const data = {
-      mail: this.mail.value,
-      password: this.password.value
-    };
+{% extends "base.html" %}
 
-    fetch("/login/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        window.location.href = data.redirect_url; // Redirige al usuario a la página de perfil
-      } else {
-        console.log('Login failed: ' + data.message);
-        // Muestra el mensaje de error al usuario
-      }
-    })
-    .catch(error => console.error("Error:", error));
-  });
-</script>
+{% block title %}Login{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block content %}
+  <form id="loginForm" class="form_login">
+    <input type="email" name="mail" placeholder="Email" class="input_email input" required>
+    <input type="password" name="password" placeholder="Contraseña" class="input_password input" required>
+    <button type="submit" class="button">Login</button>
+    <p>No tienes una cuenta? <a href="{{ url_for('main.register') }}">Regístrate aquí</a></p>
+  </form>
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}

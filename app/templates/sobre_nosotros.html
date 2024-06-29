@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nosotros.css') }}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,800;0,900;1,300;1,400;1,500;1,600;1,800;1,900&family=Kurale&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      src="https://kit.fontawesome.com/4db8309fde.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../static/js/contacto.js"></script>
+    <title>TVT Sobre Nosotros</title>
+  </head>
+
+  <body>
+    <header>
+      <nav class="header_nav">
+        <section class="header_nav-titulo">
+          <img src="../static/img/logo.jpeg" alt="" class="header_nav-titulo-logo" />
+          <h1 class="header_nav-titulo-text">Te Vendo Todo</h1>
+        </section>
+        <nav class="header_nav-busqueda">
+          <input
+            type="text"
+            placeholder="Buscar..."
+            class="header_nav-busqueda-barra"
+          />
+          <button
+            class="header_nav-busqueda-boton-lupa header_nav-button-iconos"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <button
+            class="header_nav-busqueda-boton-close header_nav-button-iconos"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </nav>
+        <nav class="header_nav-acciones">
+          <ul class="header_nav_ul-acciones-iconos">
+            {% if 'user_id' in session %}
+            <li>
+              <a href="{{ url_for('main.user_profile') }}">
+                <i class="fa-solid fa-user header_nav-iconos"></i>
+              </a>
+            </li>
+          {% else %}
+            <li>
+              <a href="{{ url_for('main.login') }}">
+                <i class="fa-solid fa-user header_nav-iconos"></i>
+              </a>
+            </li>
+          {% endif %}
+            <li>
+              <a href=""
+                ><i class="fa-solid fa-cart-shopping header_nav-iconos"></i
+              ></a>
+            </li>
+          </ul>
+        </nav>
+        <section class="menu-contenedor">
+          <button class="header_menu-desplegable header_nav-button-iconos">
+            <i class="fa-solid fa-bars menu"></i>
+          </button>
+          <button class="cerrar-menu">
+            <i class="fa-solid fa-xmark cerrar-menu"></i>
+          </button>
+        </section>
+      </nav>
+      <nav class="header_nav-links-de-navegacion">
+        <ul class="header_nav_ul-links-de-navegacion">
+          <li><a href="{{ url_for('main.index') }}">Inicio</a></li>
+          <li><a href="{{ url_for('main.productos') }}">Productos</a></li>
+          <li><a href="{{ url_for('main.sobre_nosotros') }}">Sobre Nosotros</a></li>
+          <li><a href="{{ url_for('main.contacto') }}">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- Contenido -->
+    <main>
+      <!--  -->
+
+      <section id="presentacion">
+        <h2>Nosotros</h2>
+        <h3>¿Querés vaciar tu casa, depa, local o habitación?</h3>
+        <p>
+          En <i>Te lo Vendo</i> compramos y vendemos tus productos fácilmente y
+          sin complicaciones.
+        </p>
+      </section>
+
+      <div class="container">
+        <section class="nosotros">
+          <div class="nosotros-image">
+            <img
+              src="../static/img/nos-rachel-claire-5531010.jpg"
+              alt="Productos usados"
+            />
+          </div>
+          <div class="nosotros-contenido">
+            <article class="block" id="block-1">
+              <h2>¿Qué nos hace únicos?</h2>
+              <p>
+                En Te Vendo Todo, no solo vendemos productos, ¡sino que vendemos
+                historias! Nos apasiona conectar personas con objetos que pueden
+                transformar sus vidas. ¿Tienes una reliquia en el sótano que
+                merece una segunda oportunidad? ¿O quizás buscas esa pieza única
+                que complemente tu hogar? ¡Estás en el lugar correcto!
+              </p>
+            </article>
+            <article class="block" id="block-2">
+              <h2>Nuestra Historia</h2>
+              <p>
+                Nuestra historia comenzó con un simple deseo: ayudar a nuestros
+                amigos a liberarse del desorden y ganar un poco de dinero extra
+                en el proceso. Desde entonces, hemos evolucionado hasta
+                convertirnos en una plataforma dinámica donde la comunidad se
+                encuentra para intercambiar tesoros ocultos y compartir nuevas
+                experiencias.
+              </p>
+            </article>
+            <article class="block" id="block-3">
+              <h2>La Experiencia Te Vendo Todo</h2>
+              <p>
+                Sumérgete en la experiencia Te Vendo Todo, donde cada producto
+                cuenta una historia por sí mismo. Desde la emoción de una puja
+                en una subasta hasta la satisfacción de encontrar el artículo
+                perfecto al mejor precio, cada paso en nuestro sitio está
+                diseñado para inspirarte y sorprenderte.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- Seccion del equipo -->
+
+        <section class="equipo">
+          <h2>Nuestro Equipo</h2>
+          <div class="nuestro-equipo">
+            <h3>Conoce a los Creadores de Te Vendo Todo</h3>
+            <p>
+              En Te Vendo Todo, nuestro equipo está formado por cuatro
+              apasionados individuos que se han unido para hacer realidad este
+              proyecto. Conoce a quienes están detrás de la magia:
+            </p>
+          </div>
+          <div id="list-equipo" class="team-grid">
+            <article class="team">
+              <h4>Gabriel</h4>
+              <p>
+                Gabriel es nuestro experto en tecnología y desarrollo web. Con
+                su creatividad y habilidades técnicas, ha sido fundamental en la
+                creación y el funcionamiento de nuestra plataforma en línea.
+              </p>
+            </article>
+            <article class="team">
+              <h4>Nahuel</h4>
+              <p>
+                Nahuel es el maestro de las finanzas y la logística en Te Vendo
+                Todo. Su capacidad para mantener todo en orden y su enfoque
+                meticuloso aseguran que nuestras operaciones funcionen sin
+                problemas.
+              </p>
+            </article>
+            <article class="team">
+              <h4>Daniel</h4>
+              <p>
+                Daniel es nuestro experto en marketing y comunicaciones. Con su
+                mente creativa y su pasión por conectar con la audiencia, ha
+                sido fundamental en la promoción de Te Vendo Todo y en la
+                construcción de relaciones sólidas con nuestros usuarios.
+              </p>
+            </article>
+            <article class="team">
+              <h4>Kristil</h4>
+              <p>
+                Kristil es nuestra fuerza impulsora detrás de la experiencia del
+                usuario y el diseño visual. Su atención al detalle y su visión
+                estética han dado vida a la interfaz de usuario de Te Vendo
+                Todo, haciéndola intuitiva y atractiva para nuestros usuarios.
+              </p>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <nav>
+        <ul class="footer_nav_ul-links-de-navegacion">
+          <li>
+            <ul class="footer_navegacion-direccion">
+              <li>
+                <h3>Direccion</h3>
+              </li>
+              <li>
+                <h3>..................</h3>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <ul class="footer_navegacion-redes">
+              <li>
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+              </li>
+              <li>
+                <a href=""><i class="fa-brands fa-whatsapp"></i></a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h4>Derechos de autor para codoacodo</h4>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
+</html>

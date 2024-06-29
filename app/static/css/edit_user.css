@@ -1,0 +1,51 @@
+article{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    section{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    align-items: center;
+        h2{
+            font-size: 1.7rem;
+        }
+        .form {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(0, 0, 0, 0.459);
+            border-radius: 2em;
+            padding: 1em;
+            margin: 1em;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.637);
+            .input {
+                padding: 0.3em;
+                margin-left: 1em;
+                font-size: 0.9rem;
+                margin-top: 0.3em;
+            }
+            .button {
+                all: unset;
+                cursor: pointer;
+                text-decoration: none;
+                font-size: 1.2rem;
+                padding: 0.3em 0.5rem;
+                border: 2px solid black;
+                border-radius: 0.5em;
+        
+                &:hover {
+                  border: 2px solid rgb(233, 194, 143);
+                  color: rgb(233, 194, 143);
+                }
+            }
+        }
+    }
+}
+
+
