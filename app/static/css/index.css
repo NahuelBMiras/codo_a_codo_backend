@@ -330,28 +330,28 @@
       color: rgb(255, 255, 255);
   
       .main_section-electrodomesticos {
-        background-image: url(../Img/electro.webp);
+        background-image: url(../img/electro.webp);
         background-size: cover; /* Esto hace que la imagen de fondo cubra todo el contenedor */
         background-position: center;
         order: 1;
       }
   
       .main_section-muebles {
-        background-image: url(../Img/mueble.webp);
+        background-image: url(../img/mueble.webp);
         background-size: cover; /* Esto hace que la imagen de fondo cubra todo el contenedor */
         background-position: center;
         order: 2;
       }
   
       .main_section-ropa {
-        background-image: url(../Img/ropa.webp);
+        background-image: url(../img/ropa.webp);
         background-size: cover; /* Esto hace que la imagen de fondo cubra todo el contenedor */
         background-position: center;
         order: 3;
       }
   
       .main_section-herramientas {
-        background-image: url(../Img/herramientas-manuales-basicas-02-2022-07.webp);
+        background-image: url(../img/herramientas-manuales-basicas-02-2022-07.webp);
         background-size: cover; /* Esto hace que la imagen de fondo cubra todo el contenedor */
         background-position: center;
         order: 4;
