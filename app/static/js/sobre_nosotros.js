@@ -1,7 +1,3 @@
-/*
-!Empieza el Js agregado por Nahuel B Miras para el header
-*/
-
 document.addEventListener('DOMContentLoaded', function () {
   const menuDesplegableBoton = document.querySelector(
     '.header_menu-desplegable'
@@ -48,6 +44,3 @@ document.addEventListener('DOMContentLoaded', function () {
     cerrar.classList.remove('buscando');
   });
 });
-/*
-  !Termina el Js agregado por Nahuel B Miras para el header
-  */

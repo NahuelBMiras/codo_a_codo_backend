@@ -21,7 +21,7 @@ document
       .then((data) => {
         if (data.success) {
           alert('Datos actualizados correctamente');
-          window.location.href = '/user_profile'; // Redirige al perfil del usuario
+          window.location.href = '/user_profile';
         } else {
           console.log('Error: ' + data.message);
         }
@@ -49,10 +49,9 @@ document
       .then((data) => {
         if (data.success) {
           alert('Cuenta eliminada exitosamente');
-          window.location.href = data.redirect_url; // Redirige al índice después de eliminar la cuenta
+          window.location.href = data.redirect_url;
         } else {
           console.log('Error: ' + data.message);
-          // Muestra el mensaje de error al usuario
         }
       })
       .catch((error) => console.error('Error:', error));

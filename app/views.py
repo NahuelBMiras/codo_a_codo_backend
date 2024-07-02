@@ -27,7 +27,6 @@ def login_required(f):
 @main_bp.route("/", methods=["GET"])
 @main_bp.route("/index/", methods=["GET"])
 def index():
-    # Consulta para obtener los productos con sus artículos y las imágenes asociadas
     productos = (
         Products.query.join(Articulo)
         .join(PathImg)
@@ -36,7 +35,6 @@ def index():
         .all()
     )
 
-    # Depuración: imprimir productos obtenidos
     for producto in productos:
         print(f"Producto: {producto.producto}, Precio: {producto.precio}")
         for articulo in producto.articulos:
@@ -49,10 +47,9 @@ def index():
 
 @main_bp.route("/productos/", methods=["GET"])
 def productos():
-    # Consulta para obtener los productos con sus artículos y las imágenes asociadas
+
     productos = Products.query.join(Articulo).join(PathImg).all()
 
-    # Depuración: imprimir productos obtenidos
     for producto in productos:
         print(f"Producto: {producto.producto}, Precio: {producto.precio}")
         for articulo in producto.articulos:
@@ -78,7 +75,6 @@ def contacto():
 def edit_user():
     user_id = session.get("user_id")
     if not user_id:
-        # Manejo si el usuario no tiene sesión activa
         return redirect(url_for(".login"))
 
     user = Users.query.filter_by(id_usuario=user_id).first()
@@ -155,9 +151,7 @@ def login():
             if user and bcrypt.check_password_hash(user.password_hash, password):
                 session["user_id"] = user.id_usuario
                 session["user_email"] = user.mail
-                return jsonify(
-                    success=True, redirect_url=url_for(".user_profile")
-                )  # Devuelve JSON con URL de redirección
+                return jsonify(success=True, redirect_url=url_for(".user_profile"))
             else:
                 return jsonify(success=False, message="Credenciales inválidas"), 401
 

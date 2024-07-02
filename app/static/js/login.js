@@ -3,17 +3,14 @@ document
   .addEventListener('submit', function (event) {
     event.preventDefault();
 
-    // Obtener valores del formulario
     const mail = this.mail.value.trim();
     const password = this.password.value;
 
-    // Construir el objeto de datos para enviar al servidor
     const data = {
       mail: mail,
       password: password,
     };
 
-    // Enviar datos al servidor usando fetch
     fetch('/login/', {
       method: 'POST',
       headers: {
@@ -24,9 +21,9 @@ document
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          window.location.href = data.redirect_url; // Redirige al usuario a la página de éxito según el servidor
+          window.location.href = data.redirect_url;
         } else {
-          displayErrorMessage('Email o contraseña incorrectos'); // Muestra mensaje de error al usuario
+          displayErrorMessage('Email o contraseña incorrectos');
         }
       })
       .catch((error) => console.error('Error:', error));

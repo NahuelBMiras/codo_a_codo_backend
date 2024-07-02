@@ -1,6 +1,3 @@
-/*
-!Empieza el Js agregado por Nahuel B Miras para el header
-*/
 document.addEventListener('DOMContentLoaded', function () {
   const menuDesplegableBoton = document.querySelector(
     '.header_menu-desplegable'
@@ -97,14 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
       messageText += '<p> El mensaje debe tener entre 2 y 300 caracteres </p>';
     }
     if (messageText === '') {
-      // Si no hay mensajes de error, permite el envío del formulario
       form.submit();
     } else {
       message.innerHTML = messageText;
     }
   });
 });
-
-/*
-  !Termina el Js agregado por Nahuel B Miras para el header
-  */

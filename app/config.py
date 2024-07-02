@@ -12,6 +12,5 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # Log the database URI
     logging.basicConfig(level=logging.INFO)
     logging.info(f"SQLALCHEMY_DATABASE_URI: {SQLALCHEMY_DATABASE_URI}")

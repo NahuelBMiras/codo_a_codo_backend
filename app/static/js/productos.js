@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
   for (let i = 0; i < botonesAgregarAlCarrito.length; i++) {
     botonesAgregarAlCarrito[i].addEventListener('click', function (event) {
       agregarAlCarritoClicked(event);
-      event.preventDefault(); // Evita la acción por defecto del botón
+      event.preventDefault();
     });
   }
 
