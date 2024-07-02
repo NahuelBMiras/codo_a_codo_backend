@@ -14,12 +14,9 @@
     <input type="email" name="mail" placeholder="Email" class="input_email input" required>
     <input type="password" name="password" placeholder="Contraseña" class="input_password input" required>
     <button type="submit" class="button">Registrar</button>
+    <div id="errorMessages"></div> <!-- Aquí se mostrarán los mensajes de error -->
   </form>
 {% endblock %}
-
-<script>
-console.log("hola")
-</script>
 
 {% block scripts %}
   {{ super() }}
