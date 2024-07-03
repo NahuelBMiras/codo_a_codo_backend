@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Playfair Display", serif;
   }
   
   body {
@@ -19,7 +20,7 @@
     left: 0;
     z-index: 1000;
     background-color: rgba(17, 17, 17, 255);
-    color: azure;
+    color: #fbfbfb;
   }
   
   header.buscando {
@@ -30,7 +31,7 @@
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
-    border-bottom: 1px solid azure;
+    border-bottom: 1px solid #fbfbfb;
   
     .header_nav-titulo {
       width: 30%;
@@ -47,7 +48,7 @@
   
     .header_nav-iconos {
       width: 2.5em;
-      color: azure;
+      color: #fbfbfb;
       &:hover {
         color: rgb(233, 194, 143);
       }
@@ -65,7 +66,7 @@
       justify-content: center;
       align-items: center;
       margin-right: 1em;
-      color: azure;
+      color: #fbfbfb;
   
       .header_nav-busqueda-barra {
         display: none;
@@ -109,7 +110,7 @@
         text-align: center;
         border: 0;
         background-color: rgba(17, 17, 17, 255);
-        color: azure;
+        color: #fbfbfb;
         cursor: pointer;
         &:hover {
           color: rgb(233, 194, 143);
@@ -156,7 +157,7 @@
         margin-top: 0.4em;
         border: 0;
         background-color: rgba(17, 17, 17, 255);
-        color: azure;
+        color: #fbfbfb;
   
         .menu {
           &:hover {
@@ -203,7 +204,7 @@
       justify-content: space-around;
       padding: 0.5em;
       li a {
-        color: azure;
+        color: #fbfbfb;
         text-decoration: none;
         &:hover {
           color: rgb(233, 194, 143);
@@ -307,8 +308,9 @@
   /* !Empieza el footer agregado por Nahuel B Miras */
   /* !Footer */
   footer {
+    padding: 1.5em;
     background-color: rgba(17, 17, 17, 255);
-    color: azure;
+    color: #fbfbfb;
     grid-row: 3/4;
   }
   
@@ -339,7 +341,7 @@
       }
   
       & a {
-        color: azure;
+        color: #fbfbfb;
         text-decoration: none;
         padding: 0.3em;
         border: 2px solid transparent;
@@ -555,7 +557,7 @@
         font-size: 1.1rem;
         padding: 0.3em;
         li a {
-          color: azure;
+          color: #fbfbfb;
           text-decoration: none;
           &:hover {
             color: rgb(233, 194, 143);

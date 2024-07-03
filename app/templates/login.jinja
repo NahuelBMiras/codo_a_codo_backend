@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="contenedor">
   <form id="loginForm" class="form_login">
     <input type="email" name="mail" placeholder="Email" class="input_email input" required>
     <input type="password" name="password" placeholder="Contraseña" class="input_password input" required>
@@ -15,6 +16,7 @@
     <p>No tienes una cuenta? <a href="{{ url_for('main.register') }}">Regístrate aquí</a></p>
     <div id="errorMessages"></div>
   </form>
+</div>
 {% endblock %}
 
 

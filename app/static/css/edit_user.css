@@ -1,3 +1,6 @@
+*{
+    font-family: "Playfair Display", serif;
+}
 article{
     display: flex;
     flex-direction: column;

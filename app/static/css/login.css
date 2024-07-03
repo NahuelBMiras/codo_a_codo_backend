@@ -1,3 +1,10 @@
+*{
+    font-family: "Playfair Display", serif;
+}
+.contenedor{
+    width: 100%;
+    margin-top: 10em;
+}
 .form_login {
     width: 100%;
     height: auto;
@@ -32,3 +39,9 @@
         }
     }
 }
+ @media (width < 1350px) {
+.contenedor{
+    width: 100%;
+    margin-top: 19em;
+}
+ }
