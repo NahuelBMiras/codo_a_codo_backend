@@ -8,19 +8,21 @@
 {% endblock %}
 
 {% block content %}
-<article class="user">
-    <h1 class="titulo">User Page</h1>
-    <h2 class="subtitulo">Perfil del Usuario</h2>
-    <div class="contenedor_datos">
-        <p class="datos">Nombre: {{ user.nombre }}</p>
-        <p class="datos">Apellido: {{ user.apellido }}</p>
-        <p class="datos">Email: {{ user.mail }}</p>
-    </div>
-    <a href="/edit_user" ><button class="button">Editar Perfil</button></a>
-    <form id="logoutForm" method="POST" action="{{ url_for('main.logout') }}">
-        <button type="submit" class="button">Cerrar Sesión</button>
-    </form>
-</article>
+<div class="contenedor">
+    <article class="user">
+        <h1 class="titulo">User Page</h1>
+        <h2 class="subtitulo">Perfil del Usuario</h2>
+        <div class="contenedor_datos">
+            <p class="datos">Nombre: {{ user.nombre }}</p>
+            <p class="datos">Apellido: {{ user.apellido }}</p>
+            <p class="datos">Email: {{ user.mail }}</p>
+        </div>
+        <a href="/edit_user" ><button class="button">Editar Perfil</button></a>
+        <form id="logoutForm" method="POST" action="{{ url_for('main.logout') }}">
+            <button type="submit" class="button">Cerrar Sesión</button>
+        </form>
+    </article>
+</div>
 {% endblock %}
 {% block script %}
 {{ super() }}

@@ -2,16 +2,14 @@
     font-family: "Playfair Display", serif;
 }
 article{
+    margin-top: 7em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     section{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    align-items: center;
-        h2{
+        text-align: center;
+        h2 {
             font-size: 1.7rem;
         }
         .form {

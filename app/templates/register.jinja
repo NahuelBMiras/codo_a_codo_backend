@@ -8,14 +8,16 @@
 {% endblock %}
 
 {% block content %}
-  <form id="registerForm" class="form_register">
-    <input type="text" name="nombre" placeholder="Nombre" class="input_nombre input" required>
-    <input type="text" name="apellido" placeholder="Apellido" class="input_apellido input" required>
-    <input type="email" name="mail" placeholder="Email" class="input_email input" required>
-    <input type="password" name="password" placeholder="Contraseña" class="input_password input" required>
-    <button type="submit" class="button">Registrar</button>
-    <div id="errorMessages"></div>
-  </form>
+<div class="contenedor">
+    <form id="registerForm" class="form_register">
+      <input type="text" name="nombre" placeholder="Nombre" class="input_nombre input" required>
+      <input type="text" name="apellido" placeholder="Apellido" class="input_apellido input" required>
+      <input type="email" name="mail" placeholder="Email" class="input_email input" required>
+      <input type="password" name="password" placeholder="Contraseña" class="input_password input" required>
+      <button type="submit" class="button">Registrar</button>
+      <div id="errorMessages"></div>
+    </form>
+</div>
 {% endblock %}
 
 {% block scripts %}
